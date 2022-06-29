@@ -10,9 +10,7 @@ RUN npm run install
 
 COPY . .
 
-RUN npm run build
-
 ENV PORT=${PORT:-8080}
 EXPOSE $PORT
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "build", "&&", "npm", "start" ]
