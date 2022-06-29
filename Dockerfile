@@ -13,4 +13,4 @@ COPY . .
 ENV PORT=${PORT:-8080}
 EXPOSE $PORT
 
-CMD [ "npm", "run", "build", "&&", "npm", "start" ]
+CMD [ "bash", "-c", "deploy.sh" ]
