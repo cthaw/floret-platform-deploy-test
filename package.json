@@ -1,0 +1,24 @@
+{
+  "name": "floret-platform",
+  "version": "0.0.1",
+  "description": "Floret Platform Application",
+  "main": "server/src/server.ts",
+  "scripts": {
+    "install-server": "npm i --prefix ./server",
+    "lint-server": "npm run --prefix ./server lint",
+    "test-server": "npm run --prefix ./server test",
+    "build-server": "npm run --prefix ./server build",
+    "start-server": "npm run --prefix ./server start",
+    "dev-server": "npm run --prefix ./server dev",
+    "install-client": "npm i --prefix ./client",
+    "lint-client": "npm run --prefix ./server lint",
+    "build-client": "npm run --prefix ./client build",
+    "start-client": "npm run --prefix ./client start",
+    "lint": "npm run lint-server && npm run lint-client",
+    "test": "npm run test-server",
+    "install": "npm run install-server && npm run install-client",
+    "build": "npm run build-server && npm run build-client",
+    "start": "npm run start-server",
+    "dev": "npm run dev-server"
+  }
+}
