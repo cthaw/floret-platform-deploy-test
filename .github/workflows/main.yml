@@ -3,17 +3,19 @@ name: Floret Platform CI
 on: [push]
 
 jobs:
-  build:
-
+  deploy:
+    name: Deploy Platform via SSH
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Install Modules
-      run: npm run install
-    - name: Run Linting
-      run: npm run lint
-    - name: Run Tests
-      run: npm run test
-    - name: Run Test Build
-      run: docker build . --file Dockerfile --tag floret-platform-test-build:$(date +%s)
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Setup SSH Key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.DEPLOY_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+    - name: Add known hosts
+      run: ssh-keyscan -H 54.221.104.12 >> ~/.ssh/known_hosts
+    - name: Deploy Platform version
+      run: ssh -i ~/.ssh/id_rsa ec2-user@54.221.104.12 "/home/ec2-user/app/scripts/restart.sh 0.0.5"
